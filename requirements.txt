@@ -4,4 +4,7 @@ langchain-google-genai
 google-genai
 python-dotenv
 numpy
+
 faiss-cpu # or faiss-gpu if deploying to a GPU environment
+
+google-generativeai
