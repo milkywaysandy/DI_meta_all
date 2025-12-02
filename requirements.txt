@@ -8,3 +8,5 @@ numpy
 faiss-cpu # or faiss-gpu if deploying to a GPU environment
 
 google-generativeai
+
+pydantic==2.12.3
