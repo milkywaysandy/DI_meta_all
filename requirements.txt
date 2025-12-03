@@ -9,3 +9,20 @@ google-generativeai
 langchain-core
 langchain-community
 langchain-google-genai
+
+streamlit
+google-generativeai
+# --- LangChain Core Dependencies (Pinning for compatibility) ---
+langchain==0.2.11 
+langchain-core==0.2.27
+langchain-community==0.2.11
+# -----------------------------------------------------------------
+
+# LangChain Google Provider
+langchain-google-genai==0.0.1
+# NOTE: Check if you are using Google Generative AI embeddings.
+# If you are, this package is required.
+
+# Add any other RAG-related dependencies you have (e.g., PyPDF2, faiss-cpu)
+# PyPDF2
+# faiss-cpu
