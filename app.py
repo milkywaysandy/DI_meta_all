@@ -18,7 +18,7 @@ def initialize_rag_components(api_key, _preloaded_vectorstore=None):
     print("DEBUG: Entering initialize_rag_components", file=sys.stderr)
     try:
         embeddings_model = GoogleGenerativeAIEmbeddings(
-            model="models/embedding-004",
+            model="models/text-embedding-004",
             google_api_key=api_key
         )
         print("DEBUG: Embeddings model initialized", file=sys.stderr)
@@ -139,6 +139,7 @@ if st.button("Generate Answer"):
                 for i, doc in enumerate(documents):
                     st.markdown(f"**Document {i+1}** (Source: `{doc.metadata.get('source_file', 'N/A')}`)")
                     st.code(doc.page_content[:500] + "...", language='text')
+
 
 
 
