@@ -10,7 +10,7 @@ import sys # Import sys for printing to stderr
 
 # GOOGLE_API_KEY is already defined in a previous cell (4qtvFVYF3iMr)
 # and passed into the function. Removing redundant definition here.
-
+GOOGLE_API_KEY = "AIzaSyBgY5Fr0FTwJ3ys_VFXvPeyvKkVssfIGY0"
 @st.cache_resource
 def initialize_rag_components(api_key, _preloaded_vectorstore=None):
     print("DEBUG: Entering initialize_rag_components", file=sys.stderr)
@@ -136,3 +136,4 @@ if st.button("Generate Answer"):
                 for i, doc in enumerate(documents):
                     st.markdown(f"**Document {i+1}** (Source: `{doc.metadata.get('source_file', 'N/A')}`)")
                     st.code(doc.page_content[:500] + "...", language='text')
+
