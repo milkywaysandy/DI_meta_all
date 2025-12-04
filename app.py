@@ -1,3 +1,9 @@
+!pip install streamlit
+!pip install langchain_community
+!pip install -U -q "google-genai"
+!pip install faiss-cpu
+
+
 import streamlit as st
 import os
 import google.generativeai as genai
@@ -136,4 +142,5 @@ if st.button("Generate Answer"):
                 for i, doc in enumerate(documents):
                     st.markdown(f"**Document {i+1}** (Source: `{doc.metadata.get('source_file', 'N/A')}`)")
                     st.code(doc.page_content[:500] + "...", language='text')
+
 
