@@ -78,7 +78,7 @@ def initialize_rag_components(api_key, _preloaded_vectorstore=None):
 
 # --- RAG Logic Function ---
 
-def run_rag_pipeline(query: str, retriever, llm_model,GOOGLE_API_KEY):
+def run_rag_pipeline(query: str, retriever, llm_model):
     """Executes the RAG sequence."""
 
     # 1. Retrieval
@@ -137,6 +137,7 @@ if st.button("Generate Answer"):
                 for i, doc in enumerate(documents):
                     st.markdown(f"**Document {i+1}** (Source: `{doc.metadata.get('source_file', 'N/A')}`)")
                     st.code(doc.page_content[:500] + "...", language='text')
+
 
 
 
