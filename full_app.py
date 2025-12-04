@@ -68,11 +68,13 @@ def initialize_rag_components(api_key, _preloaded_vectorstore=None):
                 allow_dangerous_deserialization=True
             )
             print(f"DEBUG: Loaded FAISS vector store from: {vectorstore_path_to_load}", file=sys.stderr)
-
         retriever = vectorstore_to_use.as_retriever(
-            search_type="similarity",
-            search_kwargs={"k": 3}
-        )
+        search_type="mmr",
+        search_kwargs={"k": 6, "fetch_k": 20, "lambda_mult": 0.6})
+        
+        #retriever = vectorstore_to_use.as_retriever(
+        #    search_type="similarity",
+        #    search_kwargs={"k": 3})
         print("DEBUG: Retriever created", file=sys.stderr)
 
         # Configure genai
