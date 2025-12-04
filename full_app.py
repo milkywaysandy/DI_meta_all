@@ -83,7 +83,7 @@ def initialize_rag_components(api_key, _preloaded_vectorstore=None):
         print("DEBUG: genai configured", file=sys.stderr)
         
         llm_model = genai.GenerativeModel(
-            model_name="gemini-2. 5-flash",
+            model_name="gemini-2.5-flash",
             generation_config={"temperature": 0}
         )
         print("DEBUG: LLM model created", file=sys.stderr)
