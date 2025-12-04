@@ -128,20 +128,37 @@ def run_rag_pipeline(query: str, retriever, llm_model, embeddings_model=None):
             context_text = "\n\n".join(context_parts)
 
             # 3. Define the Template
-            base_prompt = """You are a medical information assistant analyzing drug package inserts. 
-    
-    Context:
-    {context}
-    
-    ANSWER REQUIREMENTS:
-    - Be precise and cite sources from the context
-    - If information is not in the context, say so explicitly
-    - Structure your answer clearly with key points
-    
-    User Question:
-    {question}
-    
-    Answer:"""
+            base_prompt = """You are a medical information assistant analyzing drug package inserts and medication data.
+Use the following context to answer the question at the end.
+If you don't know the answer, just say that you don't know, don't try to make up an answer.
+Cite the source document for each piece of information you provide by referencing the 'source_file' metadata.
+CONTEXT ANALYSIS INSTRUCTIONS:
+1. Each chunk includes metadata showing which specific drug it belongs to
+2. Use the Drug name and License number to identify which medication each piece of information comes from
+3. If context shows "DRUG FAMILY DETECTED", you are analyzing multiple variants/formulations of the same drug family
+4. For drug families: synthesize information across ALL variants and clearly specify which variant each detail applies to
+5. For single drugs: focus comprehensively on that specific drug's information
+6. always answer in traditional Chinese
+
+DRUG FAMILY SYNTHESIS GUIDELINES (when family detected):
+- Compare and contrast across all variants when relevant
+- Organize your answer by topics (用法用量, 適應症, 注意事項) if comparing multiple aspects
+- Always cite which specific variant each piece of information comes from
+- When asked about "各種劑型" or "different formulations", provide comprehensive comparison
+
+Context:
+{context}
+
+ANSWER REQUIREMENTS:
+- Be precise and cite specific drug names for each piece of information
+- Use Traditional Chinese in your response
+- If comparing multiple drugs or variants, organize your answer clearly by drug name
+- If information is missing for a specific drug, state this clearly
+- For safety-critical information (contraindications, interactions, dosage), be extra thorough
+- Demonstrate your reasoning by citing the chunks (say their header names instead of chunks if you can) that made your conclusion and why that forms your conclusion
+
+Question: {question}
+Helpful Answer:"""
 
             # 4. Inject Context and Question
             final_prompt = base_prompt.format(context=context_text, question=query)
