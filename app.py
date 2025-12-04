@@ -27,13 +27,14 @@ def initialize_rag_components(api_key, _preloaded_vectorstore=None):
         if _preloaded_vectorstore is not None:
             vectorstore_to_use = _preloaded_vectorstore
             print("DEBUG: Using pre-loaded FAISS vector store.", file=sys.stderr)
+            vectorstore_path_to_load = "/faiss_index_medical/"
         else:
             print("DEBUG: Attempting to load FAISS vector store locally/from GDrive.", file=sys.stderr)
             # Define potential paths
             streamlit_local_vectorstore_path = "faiss_index_medical" # For Streamlit deployment (relative to app.py)
             gdrive_vectorstore_path = "/content/gdrive/MyDrive/NTU_work/insert_rag/faiss_index_medical" # For Colab/GDrive
 
-            vectorstore_path_to_load = None
+            vectorstore_path_to_load = "/faiss_index_medical/"
 
             # Prioritize local path for Streamlit flexibility
             if os.path.exists(streamlit_local_vectorstore_path):
@@ -138,6 +139,7 @@ if st.button("Generate Answer"):
                 for i, doc in enumerate(documents):
                     st.markdown(f"**Document {i+1}** (Source: `{doc.metadata.get('source_file', 'N/A')}`)")
                     st.code(doc.page_content[:500] + "...", language='text')
+
 
 
 
