@@ -3,3 +3,5 @@ numpy
 google-generativeai
 langchain-community
 langchain-google-genai
+faiss-gpu
+faiss-cpu
