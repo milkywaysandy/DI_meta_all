@@ -31,15 +31,21 @@ except (FileNotFoundError, KeyError):
 @st.cache_resource
 def download_vector_db_files():
     """Downloads FAISS and PKL files from Google Drive."""
+    # Ensure the download destination exists
+    if not os.path.exists(DOWNLOAD_DIR):
+        os.makedirs(DOWNLOAD_DIR)
+        
     if not os.path.exists(FAISS_PATH) or not os.path.exists(PKL_PATH):
         with st.spinner("Downloading vector database files..."):
+            # This is where the URL construction happens internally
             gdown.download(f'drive.google.com{FAISS_FILE_ID}', FAISS_PATH, quiet=True, fuzzy=True)
             gdown.download(f'drive.google.com{PKL_FILE_ID}', PKL_PATH, quiet=True, fuzzy=True)
         st.success("Vector database files downloaded!")
     
-    # You can return the path or load the database here
     return DOWNLOAD_DIR
-download_directory = download_vector_db_files() 
+
+# --- Execute the download function globally ---
+download_directory = download_vector_db_files()
 ########
 @st.cache_resource
 def initialize_rag_components(api_key, _preloaded_vectorstore=None):
