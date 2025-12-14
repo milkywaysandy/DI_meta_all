@@ -39,6 +39,7 @@ def download_vector_db_files():
     
     # You can return the path or load the database here
     return DOWNLOAD_DIR
+download_directory = download_vector_db_files() 
 ########
 @st.cache_resource
 def initialize_rag_components(api_key, _preloaded_vectorstore=None):
