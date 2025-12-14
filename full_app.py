@@ -38,8 +38,8 @@ def download_vector_db_files():
     if not os.path.exists(FAISS_PATH) or not os.path.exists(PKL_PATH):
         with st.spinner("Downloading vector database files..."):
             # This is where the URL construction happens internally
-            gdown.download(f'https://drive.google.com{FAISS_FILE_ID}', FAISS_PATH, quiet=True, fuzzy=True)
-            gdown.download(f'https://drive.google.com{PKL_FILE_ID}', PKL_PATH, quiet=True, fuzzy=True)
+            gdown.download(f'https://drive.google.com/{FAISS_FILE_ID}', FAISS_PATH, quiet=True, fuzzy=True)
+            gdown.download(f'https://drive.google.com/{PKL_FILE_ID}', PKL_PATH, quiet=True, fuzzy=True)
         st.success("Vector database files downloaded!")
     
     return DOWNLOAD_DIR
