@@ -8,12 +8,12 @@ import time
 import gdown ##
 # --- Configuration & Initialization ---
 ############
-# Define the Google Drive File ID and the local path where it should be saved
-FAISS_FILE_ID = "1fGkaOaGezGmgO6XsBzR1eXpiJ1zWTJmR" # << REPLACE WITH your index.faiss ID
-PKL_FILE_ID = "1DjgVEiJWkhBl9a8sNi56KaUUXi4RW7Pz"  # << REPLACE WITH your index.pkl ID
-DOWNLOAD_DIR = "."  # Download to the current directory where the app runs
-FAISS_PATH = os.path.join(DOWNLOAD_DIR, "index.faiss")
-PKL_PATH = os.path.join(DOWNLOAD_DIR, "index.pkl")
+# # Define the Google Drive File ID and the local path where it should be saved
+# FAISS_FILE_ID = "1fGkaOaGezGmgO6XsBzR1eXpiJ1zWTJmR" # << REPLACE WITH your index.faiss ID
+# PKL_FILE_ID = "1DjgVEiJWkhBl9a8sNi56KaUUXi4RW7Pz"  # << REPLACE WITH your index.pkl ID
+# DOWNLOAD_DIR = "."  # Download to the current directory where the app runs
+# FAISS_PATH = os.path.join(DOWNLOAD_DIR, "index.faiss")
+# PKL_PATH = os.path.join(DOWNLOAD_DIR, "index.pkl")
 ##################
 
 # ⚠️ SECURITY WARNING: Never hardcode API keys in source code!
@@ -28,24 +28,24 @@ except (FileNotFoundError, KeyError):
         st.stop()
 
 ############
-@st.cache_resource
-def download_vector_db_files():
-    """Downloads FAISS and PKL files from Google Drive."""
-    # Ensure the download destination exists
-    if not os.path.exists(DOWNLOAD_DIR):
-        os.makedirs(DOWNLOAD_DIR)
+# @st.cache_resource
+# def download_vector_db_files():
+#     """Downloads FAISS and PKL files from Google Drive."""
+#     # Ensure the download destination exists
+#     if not os.path.exists(DOWNLOAD_DIR):
+#         os.makedirs(DOWNLOAD_DIR)
         
-    if not os.path.exists(FAISS_PATH) or not os.path.exists(PKL_PATH):
-        with st.spinner("Downloading vector database files..."):
-            # This is where the URL construction happens internally
-            gdown.download(f'https://drive.google.com/uc?export=view&id={FAISS_FILE_ID}', FAISS_PATH, quiet=True, fuzzy=True)
-            gdown.download(f'https://drive.google.com/uc?export=view&id={PKL_FILE_ID}', PKL_PATH, quiet=True, fuzzy=True)
-        st.success("Vector database files downloaded!")
+#     if not os.path.exists(FAISS_PATH) or not os.path.exists(PKL_PATH):
+#         with st.spinner("Downloading vector database files..."):
+#             # This is where the URL construction happens internally
+#             gdown.download(f'https://drive.google.com/uc?export=view&id={FAISS_FILE_ID}', FAISS_PATH, quiet=True, fuzzy=True)
+#             gdown.download(f'https://drive.google.com/uc?export=view&id={PKL_FILE_ID}', PKL_PATH, quiet=True, fuzzy=True)
+#         st.success("Vector database files downloaded!")
     
-    return DOWNLOAD_DIR
+#     return DOWNLOAD_DIR
 
-# --- Execute the download function globally ---
-download_directory = download_vector_db_files()
+# # --- Execute the download function globally ---
+# download_directory = download_vector_db_files()
 ########
 @st.cache_resource
 def initialize_rag_components(api_key, _preloaded_vectorstore=None):
@@ -91,7 +91,7 @@ def initialize_rag_components(api_key, _preloaded_vectorstore=None):
 
             print(f"DEBUG: Loading FAISS from {vectorstore_path_to_load}...", file=sys.stderr)
             vectorstore_to_use = FAISS.load_local(
-                folder_path= download_directory, ########vectorstore_path_to_load,
+                folder_path= vectorstore_path_to_load, ########download_directory,
                 embeddings=embeddings_model,
                 allow_dangerous_deserialization=True
             )
