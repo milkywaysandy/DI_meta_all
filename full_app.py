@@ -5,7 +5,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 import sys
 import time
-import gdown ##
+#import gdown ##
 # --- Configuration & Initialization ---
 ############
 # # Define the Google Drive File ID and the local path where it should be saved
