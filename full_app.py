@@ -150,7 +150,7 @@ def run_rag_pipeline(query: str, retriever, llm_model, embeddings_model=None):
             # 2. Context Formatting
             context_parts = []
             for i, doc in enumerate(most_similar_documents):
-                source = doc.metadata.get('source_file', 'N/A')
+                #source = doc.metadata.get('source_file', 'N/A')###########################meta
                 content = doc.page_content
                 context_parts.append(f"Source: {source}\nContent: {content}")
                 print(f"DEBUG: Document {i+1} source: {source}", file=sys. stderr)
