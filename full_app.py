@@ -150,7 +150,7 @@ def run_rag_pipeline(query: str, retriever, llm_model, embeddings_model=None):
             # 2. Context Formatting
             context_parts = []
             for i, doc in enumerate(most_similar_documents):
-                source = doc.page_content# doc.metadata.get('source_file', 'N/A')###########################meta
+                source = doc.metadata.get('source_file', 'N/A')
                 content = doc.page_content
                 context_parts.append(f"Source: {source}\nContent: {content}")
                 print(f"DEBUG: Document {i+1} source: {source}", file=sys. stderr)
@@ -268,7 +268,7 @@ if st.button("Generate Answer"):
                 with st.expander("📄 Source Documents (Context Used)"):
                     if documents:
                         for i, doc in enumerate(documents):
-                            st.markdown(f"**Document {i+1}** (Source: `{doc.metadata.get('source_file', 'N/A')}`)")
+                            #st.markdown(f"**Document {i+1}** (Source: `{doc.metadata.get('source_file', 'N/A')}`)") ##########################meta
                             st.code(doc.page_content[:500] + ".. .", language='text')
                     else:
                         st.write("No source documents available.")
