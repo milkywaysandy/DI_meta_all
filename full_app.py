@@ -16,18 +16,6 @@ import time
 # PKL_PATH = os.path.join(DOWNLOAD_DIR, "index.pkl")
 ##################
 
-# ⚠️ SECURITY WARNING: Never hardcode API keys in source code!
-# Use Streamlit secrets instead:
-try:
-    GOOGLE_API_KEY = st.secrets["GOOGLE_API_KEY"]
-except (FileNotFoundError, KeyError):
-    # Fallback for local testing only - Remove before production
-    GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-    if not GOOGLE_API_KEY:
-        st.error("❌ GOOGLE_API_KEY not found.  Please set it in Streamlit secrets or environment variables.")
-        st.stop()
-
-############
 # @st.cache_resource
 # def download_vector_db_files():
 #     """Downloads FAISS and PKL files from Google Drive."""
