@@ -16,6 +16,8 @@ import time
 # PKL_PATH = os.path.join(DOWNLOAD_DIR, "index.pkl")
 ##################
 
+GOOGLE_api_key = st.secrets.get("GOOGLE_API_KEY") or os.getenv("GOOGLE_API_KEY")
+
 # @st.cache_resource
 # def download_vector_db_files():
 #     """Downloads FAISS and PKL files from Google Drive."""
